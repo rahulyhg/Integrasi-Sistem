@@ -20,10 +20,10 @@
 	<div class="container">
 		<div class="row head">
 			<div class="col-md-8">
-				<h2>Manage Employees</h2>
+				<h2>Manage Inventory</h2>
 			</div>
 			<div class="col-md-4 align text-right my-auto">
-				<button class="btn btn-success btn-sm">Add New Employee</button>
+				<button class="btn btn-success btn-sm">Add New Inventory</button>
 			</div>
 		</div>
 		<div class="row">
@@ -43,22 +43,29 @@
 							<?php
 							$url = "https://webservice-demo.herokuapp.com/api/v1/barang/";
 							$data = file_get_contents($url);
-							$hasil = json_decode($data);							
+							$hasil = json_decode($data);
+							$no = 1;
 							foreach ($hasil->data as $hasil) {	
 								echo "<tr>";
-								echo "<td>".$hasil->id."</td>";
+								// echo "<td>".$hasil->id."</td>";
+								echo "<td>".$no."</td>";
 								echo "<td>".$hasil->nama_barang."</td>";
 								echo "<td>".$hasil->kategori."</td>";
 								echo "<td>".$hasil->count."</td>";
+								echo "<td class='action'>";
+								echo '<span><a href="#"><span class="fas fa-edit"></span></a></span>';
+								echo '<span><a href="php/delete.php?id='.$hasil->id.'"><span class="fas fa-trash-alt"></span></a></span>';
+								echo "</td>";
+								$no++;
 							?>
-							<td class='text-center'>
+							<!-- <td class='text-center'>
 								<span><a href="#"><span class="fas fa-edit"></span></a></span>
-								<span><a href=""><span class="fas fa-trash-alt"></span></a></span>
-							</td>
-							<?php								
+								<span><a href="php/delete.php?id=$hasil->id"><span class="fas fa-trash-alt"></span></a></span>
+							</td> -->
+							<?php
 								echo "<tr>";
 							}
-							?>							
+							?>
 						</tbody>
 					</table>
 				</div>
