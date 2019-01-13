@@ -29,67 +29,36 @@
 		<div class="row">
 			<div class="col-md-12">
 				<div class="table-responsive">
-					<table class="table table-striped table-hover">
+					<table class="table table-hover">
 						<thead>
 							<tr>
-								<th>ID</th>
+								<th>No</th>
 								<th class="w-50">Nama Barang</th>
 								<th class="w-50">Kategori</th>
 								<th>Jumlah</th>
 								<th>Actions</th>
 							</tr>
-						</thead>		
+						</thead>
 						<tbody>
-							<tr>
-								<td>1</td>
-								<td>Aufa</td>
-								<td>Depok</td>
-								<td>100</td>
-								<td class="text-center">
-									<span><a href="#"><span class="fas fa-edit"></span></a></span>
-									<span><a href=""><span class="fas fa-trash-alt"></span></a></span>
-								</td>
-							</tr>
-							<tr>
-								<td>1</td>
-								<td>Aufa</td>
-								<td>Depok</td>
-								<td>100</td>
-								<td class="text-center">
-									<span><a href="#"><span class="fas fa-edit"></span></a></span>
-									<span><a href=""><span class="fas fa-trash-alt"></span></a></span>
-								</td>						
-							</tr>
-							<tr>
-								<td>1</td>
-								<td>Aufa</td>
-								<td>Depok</td>
-								<td>100</td>
-								<td class="text-center">
-									<span><a href="#"><span class="fas fa-edit"></span></a></span>
-									<span><a href=""><span class="fas fa-trash-alt"></span></a></span>
-								</td>
-							</tr>
-							<tr>
-								<td>1</td>
-								<td>Aufa</td>
-								<td>Depok</td>
-								<td>100</td>
-								<td class="text-center">
-									<span><a href="#"><span class="fas fa-edit"></span></a></span>
-									<span><a href=""><span class="fas fa-trash-alt"></span></a></span>
-								</td>
-							</tr>
-							<tr>
-								<td>1</td>
-								<td>Aufa</td>
-								<td>Depok</td>
-								<td>100</td>
-								<td class="text-center">
-									<span><a href="#"><span class="fas fa-edit"></span></a></span>
-									<span><a href=""><span class="fas fa-trash-alt"></span></a></span>
-								</td>
-							</tr>
+							<?php
+							$url = "https://webservice-demo.herokuapp.com/api/v1/barang/";
+							$data = file_get_contents($url);
+							$hasil = json_decode($data);							
+							foreach ($hasil->data as $hasil) {	
+								echo "<tr>";
+								echo "<td>".$hasil->id."</td>";
+								echo "<td>".$hasil->nama_barang."</td>";
+								echo "<td>".$hasil->kategori."</td>";
+								echo "<td>".$hasil->count."</td>";
+							?>
+							<td class='text-center'>
+								<span><a href="#"><span class="fas fa-edit"></span></a></span>
+								<span><a href=""><span class="fas fa-trash-alt"></span></a></span>
+							</td>
+							<?php								
+								echo "<tr>";
+							}
+							?>							
 						</tbody>
 					</table>
 				</div>

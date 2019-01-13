@@ -20,3 +20,7 @@ div.container {
 	border-radius: 25px;
 	background-color: #27ae60
 }
+
+.row .col-md-12 {
+	padding: 0px;
+}
