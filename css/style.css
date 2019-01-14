@@ -24,3 +24,9 @@ div.container {
 .row .col-md-12 {
 	padding: 0px;
 }
+
+/*Form : Create*/
+
+form {
+	padding: 20px 0;
+}
