@@ -14,7 +14,7 @@
 	<!-- Owm Style -->
 	<link rel="stylesheet" href="css/style.css">
 
-	<title>Document</title>
+	<title>Inventory Management</title>
 </head>
 <body>
 	<div class="container">
@@ -52,8 +52,8 @@
 								echo "<td>".$hasil->nama_barang."</td>";
 								echo "<td>".$hasil->kategori."</td>";
 								echo "<td>".$hasil->count."</td>";
-								echo "<td class='action'>";
-								echo '<span><a href="#"><span class="fas fa-edit"></span></a></span>';
+								echo "<td class='text-center'>";
+								echo '<span><a href="php/edit.php?id='.$hasil->id.'"><span class="fas fa-edit"></span></a></span>';
 								echo '<span><a href="php/delete.php?id='.$hasil->id.'"><span class="fas fa-trash-alt"></span></a></span>';
 								echo "</td>";
 								$no++;

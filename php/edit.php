@@ -14,13 +14,13 @@
 	<!-- Owm Style -->
 	<link rel="stylesheet" href="../css/style.css">
 
-	<title>Create - Inventory Management</title>
+	<title>Edit - Inventory Management</title>
 </head>
 <body>
 	<div class="container">
 		<div class="row head">
 			<div class="col-md-8">
-				<h2>Add Inventory</h2>
+				<h2>Edit Inventory</h2>
 			</div>
 			<div class="col-md-4 align text-right my-auto">
 				<a href="create.php"><button class="btn btn-success btn-sm">Add New Inventory</button></a>
@@ -28,20 +28,27 @@
 		</div>
 		<div class="row">
 			<div class="col-md-12">
-				<form action="create.php" method="POST">
+				<form action="edit.php" method="POST">					
 					<div class="form-group">
-						<label>Nama Barang</label>
+						<label>Nama Barang</label>						
 						<input class="form-control" name="namabarang" type="text" required="required">
+						
 					</div>
 					<div class="form-group">
 						<label>Jumlah Barang</label>
 						<input class="form-control" name="jumlahbarang" type="text" required="required">
+						
 					</div>
 					<div class="form-group">
 						<label>Kategori Barang</label>
-						<input class="form-control" name="kategoribarang" type="text" required="required">
+						<input class="form-control" name="kategoribarang" type="text" required="required">						
 					</div>
-					<button type="submit" class="btn btn-primary">Submit</button>
+					<?php
+					$id = $_GET["id"];
+					echo '<input type="hidden" name="id" value="'.$id.'">';
+					?>
+					
+					<button type="submit" class="btn btn-primary">Update</button>
 				</form>				
 			</div>
 		</div>
@@ -55,38 +62,44 @@
 </html>
 
 <?php
-if (isset($_POST["namabarang"])) {
+if (isset($_POST["id"])) {
+	$id = $_POST["id"];
 	$namaBarang = $_POST["namabarang"];
 	$jumlahBarang = $_POST["jumlahbarang"];
 	$kategoriBarang = $_POST["kategoribarang"];
-	$url = "https://webservice-demo.herokuapp.com/api/v1/barang/?key=12345";
+	$url = "https://webservice-demo.herokuapp.com/api/v1/barang/$id?key=12345";
+	$data = file_get_contents($url);
+	$hasil = json_decode($data);
 
+	if ($hasil->data == true) {
+		$ch = curl_init();	
+		$post = [
+			'name' => $namaBarang,
+			'count' => $jumlahBarang,
+			'id_kategori' => $kategoriBarang,
+		];
+		
+		curl_setopt($ch, CURLOPT_CUSTOMREQUEST, "PUT"); 
 
-	$ch = curl_init();	
+		curl_setopt($ch, CURLOPT_URL, $url);
 
-	$post = [
-		'name' => $namaBarang,
-		'count' => $jumlahBarang,
-		'id_kategori' => $kategoriBarang,
-	];
+		curl_setopt($ch, CURLOPT_RETURNTRANSFER, 1);
 
-	curl_setopt($ch, CURLOPT_URL, $url);
+		curl_setopt($ch, CURLOPT_HEADER, false);
 
-	curl_setopt($ch, CURLOPT_RETURNTRANSFER, 1);
+		curl_setopt($ch, CURLOPT_POST, count($post));
 
-	curl_setopt($ch, CURLOPT_HEADER, false);
+		curl_setopt($ch, CURLOPT_POSTFIELDS, http_build_query($post));
 
-	curl_setopt($ch, CURLOPT_POST, count($post));
+		$output = curl_exec($ch);
 
-	curl_setopt($ch, CURLOPT_POSTFIELDS, $post);
+		curl_close($ch);
 
-	$output = curl_exec($ch);
-
-	curl_close($ch);
-
-	// echo $output;
-
-	header("Location: http://localhost/ISS/");
-	die();
+		header("Location: http://localhost/ISS/");
+		die();
+	}
+	else {
+		echo "Datanya tidak ada, apanya yang mau diedit";
+	}
 }
 ?>
