@@ -37,11 +37,15 @@
 					<div class="form-group">
 						<label>Jumlah Barang</label>
 						<input class="form-control" name="jumlahbarang" type="text" required="required">
-						
 					</div>
 					<div class="form-group">
 						<label>Kategori Barang</label>
-						<input class="form-control" name="kategoribarang" type="text" required="required">						
+						<select class="form-control" name="kategoribarang" required="required">
+							<option value="1">1 - Elektronik</option>
+							<option value="2">2 - Sembako</option>
+							<option value="3">3 - Furniture</option>
+							<option value="4">4 - Other</option>
+						</select>	
 					</div>
 					<?php
 					$id = $_GET["id"];

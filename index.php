@@ -14,7 +14,7 @@
 	<!-- Owm Style -->
 	<link rel="stylesheet" href="css/style.css">
 
-	<title>Inventory Management</title>
+	<title> Inventory Management</title>
 </head>
 <body>
 	<div class="container">
