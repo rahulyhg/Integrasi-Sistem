@@ -30,3 +30,17 @@ div.container {
 form {
 	padding: 20px 0;
 }
+
+/*Icon: Edit and Delete*/
+
+td span {
+	padding: 0 3px;
+}
+
+td span a span.fa-edit {
+	color: #FFC107;
+}
+
+td span a span.fa-trash-alt {
+	color: #F44336;
+}
